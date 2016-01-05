@@ -102,7 +102,8 @@ for jj = 2:size(data,1)
         log_weight(i) = get_weight(dist(jj, :, i), data(jj, :));
     end
     if sum(exp(log_weight)) == 0
-        log_weight = log_weight - mean(log_weight(log_weight ~= -Inf));
+        g = dist(jj-1, :, i);
+        log_weight = log_weight - median(log_weight(log_weight ~= -Inf));
     end
     weight = exp(log_weight);
     
@@ -112,10 +113,10 @@ for jj = 2:size(data,1)
     if sum(weight) == 0
         error(['the weights of distro ',num2str(jj), ' are all 0'])
     end
-    weight = weight / sum(weight);
     if sum(isnan(weight))
         error('one of the weight is nan')
     end
+    weight = weight / sum(weight);
     
     % resample
     [~, ~, ix] = histcounts(rand(1, particleN), [0 cumsum(weight)]);
@@ -130,7 +131,10 @@ distro = mean(dist, 3);
 end
 
 function log_weight = get_weight(d, data)
-log_weight = sum(log(d(data)));
+w = d(data);
+w(w == 0) = 1e-150;
+log_weight = sum(log(w));
+
 end
 
 function x = dirichletrnd(gamma)

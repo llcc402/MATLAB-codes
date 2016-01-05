@@ -29,7 +29,7 @@ if nargin < 1
 end
 
 G1 = G1 / sum(G1);
-ix = find(G1 > 1e-100);
+ix = find(G1 > 1e-200);
 G2 = zeros(1, length(G1));
 
 if length(ix) == 1
