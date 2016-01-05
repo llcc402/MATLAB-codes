@@ -5,7 +5,7 @@ sum_g2 = zeros(1,K);
 G0_hard = [];
 G1_hard = [];
 G2_hard = [];
-parfor k = 1:K
+for k = 1:K
     G0 = gem(100, 5);
     G1 = dpDisrnd(1, G0);
     
