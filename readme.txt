@@ -2,4 +2,4 @@
 
 Including programs:
 
-1. The smoothed Hierarchical Dirichlet Process.
+1. The smoothed Hierarchical Dirichlet Process (HDP).
