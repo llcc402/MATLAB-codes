@@ -76,7 +76,7 @@ for i = 1:particleN
     log_weight(i) = get_weight(dist(1, :, i), data(1, :));
 end
 if sum(exp(log_weight)) == 0
-    log_weight = log_weight - median(log_weight(log_weight ~= -Inf));
+    log_weight = log_weight - max(log_weight(log_weight ~= -Inf));
 end
 weight = exp(log_weight);
 
@@ -103,13 +103,9 @@ for jj = 2:size(data,1)
     for i = 1:particleN
         log_weight(i) = get_weight(dist(jj, :, i), data(jj, :));
     end
-    n = 1;
-    while sum(exp(log_weight)) == 0
-        log_weight = log_weight - mean(log_weight(log_weight ~= -Inf))/100 * n;
-        n = n + 1;
-        if n == 100
-            error('i cannot find right weights')
-        end
+    
+    if sum(exp(log_weight)) == 0
+        log_weight = log_weight - max(log_weight);
     end
     weight = exp(log_weight);
     
