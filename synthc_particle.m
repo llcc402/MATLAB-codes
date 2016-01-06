@@ -34,11 +34,11 @@ end
 %--------------------------------------------------------------------------
 % STEP 1: Init
 %--------------------------------------------------------------------------
-values = unique(data);
-counts = histc(data(:), values);
+counts = histcounts(data(:), 1:100);
 if length(counts) < actN
     counts = [counts, zeros(1, actN - length(counts))];
 end
+
 G0 = dirichletrnd(gamma + counts);
 
 %--------------------------------------------------------------------------
