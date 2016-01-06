@@ -34,7 +34,8 @@ end
 %--------------------------------------------------------------------------
 % STEP 1: Init
 %--------------------------------------------------------------------------
-counts = histcounts(data);
+values = unique(data);
+counts = histc(data(:), values);
 if length(counts) < actN
     counts = [counts, zeros(1, actN - length(counts))];
 end
