@@ -17,7 +17,7 @@
 %              s.t. KL(G_{k-1}||G_k) <= B
 function [distro, data, kl] = data_generate(G0, B, K, n, m, alpha, concent)
 if nargin < 7
-    concent = .005;
+    concent = .003;
 end
 if nargin < 6
     alpha = 1;
