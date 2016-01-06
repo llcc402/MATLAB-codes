@@ -17,7 +17,7 @@
 %              s.t. KL(G_{k-1}||G_k) <= B
 function [distro, data, kl] = data_generate(G0, B, K, n, m, alpha, concent)
 if nargin < 7
-    concent = .003;
+    concent = .03;
 end
 if nargin < 6
     alpha = 1;
@@ -41,20 +41,21 @@ end
 % init
 kl = zeros(1, K-1);
 distro = zeros(K, n);
+distro_noise = distro;
 
 % generate G1
 distro(1, :) = dpDisrnd(alpha, G0);
 % add noise
 noise = gamrnd(concent, 1, [1, n]);
-distro(1,:) = distro(1,:) + noise;
-distro(1,:) = distro(1,:) / sum(distro(1,:));
+distro_noise(1,:) = distro(1,:) + noise;
+distro_noise(1, :) = distro_noise / sum(distro_noise);
 
-for k = 2:K
+for k = 2:K    
     distro(k, :) = smoothSample(G0, distro(k-1, :), B, alpha);
     % add noise
     noise = gamrnd(concent, 1, [1, n]);
-    distro(k,:) = distro(k,:) + noise;
-    distro(k,:) = distro(k,:) / sum(distro(k,:));
+    distro_noise(k, :) = distro(k,:) + noise;
+    distro_noise(k,:) = distro_noise(k,:) / sum(distro_noise(k,:));
 
     kl(k-1) = symKL(distro(k-1,:), distro(k,:));
 end
@@ -62,7 +63,7 @@ end
 % generate data points
 data = zeros(K, m);
 for k = 1:K
-    data(k, :) = discreternd(m, distro(k, :));
+    data(k, :) = discreternd(m, distro_noise(k, :));
 end
 
 end
