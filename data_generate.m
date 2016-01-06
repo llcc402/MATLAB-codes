@@ -48,7 +48,7 @@ distro(1, :) = dpDisrnd(alpha, G0);
 % add noise
 noise = gamrnd(concent, 1, [1, n]);
 distro_noise(1,:) = distro(1,:) + noise;
-distro_noise(1, :) = distro_noise / sum(distro_noise);
+distro_noise(1, :) = distro_noise(1,:) / sum(distro_noise(1,:));
 
 for k = 2:K    
     distro(k, :) = smoothSample(G0, distro(k-1, :), B, alpha);
