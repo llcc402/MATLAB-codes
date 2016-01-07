@@ -4,13 +4,13 @@ Description of the functions
 
 1. data_generation: Generate synthetic data set with the following processure:
 
-1.1. Generate G0
+  1.1. Generate G0
 
-1.2. Generate G1,...,G20 smoothly
+  1.2. Generate G1,...,G20 smoothly
 
-1.3. Add noise to G1,...,G20. The noise is dirichlet distributed
+  1.3. Add noise to G1,...,G20. The noise is dirichlet distributed
 
-1.4. Generate data set according to G1,...,G20
+  1.4. Generate data set according to G1,...,G20
 
 2. discreternd: Generate discrete distributed data
 
