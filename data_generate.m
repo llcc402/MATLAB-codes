@@ -15,9 +15,9 @@
 %     distro    =  (G1; G2; G3; ...; G_K)
 %     G_k       ~   G0, k=1, ..., K
 %              s.t. KL(G_{k-1}||G_k) <= B
-function [distro, data, kl] = data_generate(G0, B, K, n, m, alpha, concent)
+function [distro, distro_noise, data, kl] = data_generate(G0, B, K, n, m, alpha, concent)
 if nargin < 7
-    concent = .03;
+    concent = 0.03;
 end
 if nargin < 6
     alpha = 1;
@@ -46,16 +46,12 @@ distro_noise = distro;
 % generate G1
 distro(1, :) = dpDisrnd(alpha, G0);
 % add noise
-noise = gamrnd(concent, 1, [1, n]);
-distro_noise(1,:) = distro(1,:) + noise;
-distro_noise(1, :) = distro_noise(1,:) / sum(distro_noise(1,:));
+distro_noise(1,:) = add_noise(distro(1,:), concent);
 
 for k = 2:K    
     distro(k, :) = smoothSample(G0, distro(k-1, :), B, alpha);
     % add noise
-    noise = gamrnd(concent, 1, [1, n]);
-    distro_noise(k, :) = distro(k,:) + noise;
-    distro_noise(k,:) = distro_noise(k,:) / sum(distro_noise(k,:));
+    distro_noise(k,:) = add_noise(distro(k,:), concent);
 
     kl(k-1) = symKL(distro(k-1,:), distro(k,:));
 end
@@ -68,10 +64,10 @@ end
 
 end
 
-% G0 = gem(100, 5);
-% data = zeros(5, 100);
-% data(1, :) = dpDisrnd(1, G0);
-% for k = 2:5
-%     data(k,:) = smoothSample(G0, G1);
-%     kl(data(k-1,:), data(k, :))
-% end
+function noisy_data = add_noise(data, concent)
+% data is a row vector
+noise = gamrnd(concent, 1, 1, length(data));
+noise = noise / sum(noise);
+noisy_data = data + noise;
+noisy_data = noisy_data / sum(noisy_data);
+end
