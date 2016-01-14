@@ -38,7 +38,7 @@ clear
 clc
 
 activateN = 100;
-particleN = 1000;
+particleN = 2000;
 gibsN = 10;
 alpha = 1;
 B = 1;
@@ -52,8 +52,8 @@ tic;
 fprintf('The time of gibbs sampling for %d iterations is: %f seconds\n', gibsN, toc)
 
 % traditional sampling
-tic;
-distro_trad = traditional_particle(data, particleN, activateN, gamma,...
-    alpha, gibsN);
-fprintf('The time of traditional sampling for %d iterations is: %f seconds\n', gibsN, toc)
+% tic;
+% distro_trad = traditional_particle(data, particleN, activateN, gamma,...
+%     alpha, gibsN);
+% fprintf('The time of traditional sampling for %d iterations is: %f seconds\n', gibsN, toc)
 

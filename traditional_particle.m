@@ -66,7 +66,8 @@ end
 
 %%
 function w = get_weight(prob, data)
-w = log(prob(data));
+w = prob(data);
 w(w == 0) = 1e-200;
+w = log(w);
 w = sum(w);
 end
