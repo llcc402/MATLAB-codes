@@ -70,9 +70,4 @@ legend('smoothed', 'tradtional')
 kl_smooth = 1:19;
 kl_trad = 1:19;
 for i = 1:19
-    kl_smooth(i) = symKL(distro_smooth(i,:), distro_smooth(i+1,:));
-    kl_trad(i) = symKL(distro_trad(i,:), distro_trad(i+1,:));
-end
-plot(1:19, kl_smooth, '-o', 1:19, kl_trad, '--*')
-title('Succesive symetric kl-divergence')
-legend('smoothed', 'traditional')
+    kl_smooth(i) = 
