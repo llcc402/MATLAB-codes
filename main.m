@@ -49,11 +49,11 @@ gamma = 0.001;
 tic; 
 [distro_smooth, G0] = synthc_particle(data, gibsN, particleN,...
     activateN, alpha, B, gamma);
-fprintf('The time of gibbs sampling for %d iterations is: %f seconds\n', gibsN, toc)
+fprintf('The time of smooth sampling for %d iterations is: %f seconds\n', gibsN, toc)
 
 % traditional sampling
-% tic;
-% distro_trad = traditional_particle(data, particleN, activateN, gamma,...
-%     alpha, gibsN);
-% fprintf('The time of traditional sampling for %d iterations is: %f seconds\n', gibsN, toc)
+tic;
+distro_trad = traditional_particle(data, particleN, activateN, gamma,...
+    alpha, gibsN);
+fprintf('The time of traditional sampling for %d iterations is: %f seconds\n', gibsN, toc)
 
