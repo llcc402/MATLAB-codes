@@ -11,7 +11,7 @@
 %     distro      a matrix of order m * actN, where m is number of groups. 
 %     G0          a row vector of length actN.
 
-function [distro, G0] = synthc_particle(data, gibsN, particleN, actN, alpha, B, gamma)
+function [distro_mean, G0] = synthc_particle(data, gibsN, particleN, actN, alpha, B, gamma)
 if nargin < 7
     gamma = 5;
 end
@@ -36,6 +36,7 @@ end
 %--------------------------------------------------------------------------
 counts = histcounts(data(:), 1:101);
 G0 = dirichletrnd(gamma + counts);
+distro_mean = zeros(size(data, 1), actN);
 
 %--------------------------------------------------------------------------
 % STEP 2: Gibbs sampling
@@ -44,11 +45,13 @@ for gibsIter = 1:gibsN
     
     % particle filtering method sampling distro
     distro = particle(data, G0, alpha, particleN, B);
+    distro_mean = distro_mean + distro;
     
     % sample G0
     G0 = dirichletrnd(gamma + counts);
     G0 = G0 / sum(G0);
 end
+distro_mean = distro_mean / gibsN;
 
 end
 

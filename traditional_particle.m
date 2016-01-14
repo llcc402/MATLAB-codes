@@ -1,4 +1,4 @@
-function distro_trad = traditional_particle(data, particleN, actN, gamma, alpha, gibsN)
+function distro_trad_mean = traditional_particle(data, particleN, actN, gamma, alpha, gibsN)
 if nargin < 6
     gibsN = 1;
 end
@@ -11,6 +11,7 @@ end
 
 % init
 distro_trad = zeros(size(data,1), actN);
+distro_trad_mean = zeros(size(distro_trad));
 
 for iter = 1:gibsN
     % generate G0
@@ -21,7 +22,9 @@ for iter = 1:gibsN
     for i = 1:size(data,1)
         distro_trad(i,:) = particle(G0, data(i,:), particleN, alpha, actN);
     end
+    distro_trad_mean = distro_trad_mean + distro_trad;
 end
+distro_trad_mean = distro_trad_mean / gibsN;
 
 end
 
