@@ -111,7 +111,7 @@ while x == 0 && n < 99
     n = n + 1;
 end
 if n >= 99
-    error('i cannot sample G2(1)')
+    x = 1e-150;
 end
 
 end

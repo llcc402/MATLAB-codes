@@ -8,7 +8,7 @@ K = 10;
 kl_bound_change = zeros(N, K);
         
 tic;
-parfor k = 1:K
+for k = 1:K
     temp = zeros(N,1);
     for i = 1:N
         G0 = gem(100, 5);
