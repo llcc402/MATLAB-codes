@@ -50,4 +50,6 @@
 
 5. pami_hdp: the application to PAMI data set with HDP.
 
+## Data included:
 
+1. the pami data set. The rows are corresponding to pami papers and the columns are corresponding to words.
