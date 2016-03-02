@@ -1,6 +1,6 @@
-# The smoothed Hierarchical Dirichlet Process(HDP)
+# The Smoothed Hierarchical Dirichlet Process(SHDP)
 
-Description of the functions 
+## Functions included:
 
 1. data_generation: Generate synthetic data set with the following processure:
 
@@ -32,4 +32,22 @@ Description of the functions
 
 11. traditional_particle: Use particle filtering to sample distributions (DP distributed) with traditional methods.
 
-12. trucBetarnd: Generate truncated Beta distributed data. 
+12. trucBetarnd: Generate truncated Beta distributed data.
+
+13. mykmeans: used in spectral clustering.
+
+14. sym_cluster: the spectral clustering with symmetric normalized Laplacian.
+
+## Scripts included:
+
+1. change_bound: show how the sym KL for G_2,1 and G_2,2 changes with different bound B.
+
+2. compare_kl: compare the sym KL with SHDP and HDP.
+
+3. main: generate data with data_generate and sample G_1:20 from SHDP and HDP.
+
+4. pami: the application to PAMI data set with SHDP.
+
+5. pami_hdp: the application to PAMI data set with HDP.
+
+
